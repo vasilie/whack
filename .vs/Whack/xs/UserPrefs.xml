@@ -1,0 +1,15 @@
+﻿<Properties StartupConfiguration="{49C30EF1-7401-5A36-95E8-5BB6BC4E4662}|">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Pig.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Player.cs" Line="22" Column="19" />
+      <File FileName="Assets/Scripts/Pig.cs" Line="8" Column="34" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

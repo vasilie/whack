@@ -10,6 +10,9 @@ public class Player : MonoBehaviour {
 	private float timer;
 	public AudioClip hitSound;
     private CapsuleCollider2D capsule;
+    public float strength = 1500f;
+    public int damage = 5;
+
 	// Use this for initialization
 
 	void Start () {
@@ -34,12 +37,14 @@ public class Player : MonoBehaviour {
     void OnTriggerEnter2D (Collider2D other){
 		
 		
-			other.attachedRigidbody.AddForce(new Vector2(1500f, 1400f));
-            capsule.enabled = false;
-            Debug.Log("Whack!");
-			Debug.Log(other.attachedRigidbody);
-			audioData.PlayOneShot(hitSound, 1f);
-		
+        other.attachedRigidbody.AddForce(new Vector2(strength, strength));
+        capsule.enabled = false;
+        Debug.Log("Whack!");
+		Debug.Log(other.attachedRigidbody);
+		audioData.PlayOneShot(hitSound, 1f);
+        if (other.gameObject.tag == "pig"){
+            other.gameObject.GetComponent<Pig>().LoseHealth(damage);
+        }	
 
 	
 	}
@@ -53,6 +58,8 @@ public class Player : MonoBehaviour {
 			
 			anim.SetBool("space-pressed", true);
 			anim.SetBool("space-released", false);
+            HitFalse();
+
 		}
 		if (Input.GetKeyUp(KeyCode.Space)){
 			anim.SetBool("space-pressed", false);
