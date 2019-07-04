@@ -9,6 +9,8 @@ public class Player : MonoBehaviour {
 	public float timerInit;
 	private float timer;
 	public AudioClip hitSound;
+    public AudioClip metalHitSound;
+    public AudioClip[] hitSounds;
     private CapsuleCollider2D capsule;
     public float strength = 1500f;
     public int damage = 5;
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour {
 		timer = timerInit;
         capsule = gameObject.GetComponent<CapsuleCollider2D>();
         capsule.enabled = false;
+        hitSound = hitSounds[Mathf.FloorToInt(Random.RandomRange(0f, 5f))];
     }
     void HitFalse ()
     {
@@ -36,15 +39,28 @@ public class Player : MonoBehaviour {
     }
     void OnTriggerEnter2D (Collider2D other){
 		
+        if (capsule.enabled){
+            other.attachedRigidbody.AddForce(new Vector2(strength, strength));
+            capsule.enabled = false;
+            if (other.gameObject.GetComponent<Pig>().armor > 0)
+            {
+                hitSound = metalHitSound;
+            }
+            else
+            {
+                hitSound = hitSounds[Mathf.FloorToInt(Random.RandomRange(0f, 5f))];
+            }
+            audioData.PlayOneShot(hitSound, 1f);
+            if (other.gameObject.tag == "pig"){
+                other.gameObject.GetComponent<Pig>().LoseHealth(damage);
+            }   
+        }
+       
+
+
 		
-        other.attachedRigidbody.AddForce(new Vector2(strength, strength));
-        capsule.enabled = false;
-        Debug.Log("Whack!");
-		Debug.Log(other.attachedRigidbody);
-		audioData.PlayOneShot(hitSound, 1f);
-        if (other.gameObject.tag == "pig"){
-            other.gameObject.GetComponent<Pig>().LoseHealth(damage);
-        }	
+       
+		
 
 	
 	}
